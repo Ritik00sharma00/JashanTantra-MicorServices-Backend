@@ -1,0 +1,35 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { GatewayController } from './gateway.controller';
+import { GatewayService } from './gateway.service';
+import { ApiKeyGuard } from './api-key.guard';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    ClientsModule.register([
+      {
+        name: 'Service Client',
+        transport: Transport.RMQ,
+        options: {
+          urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+          queue: process.env.service ?? 'service',
+          queueOptions: { durable: false },
+        },
+      },
+      {
+        name: 'User Client',
+        transport: Transport.RMQ,
+        options: {
+          urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+          queue: process.env.user_queue ?? 'user_queue',
+          queueOptions: { durable: false },
+        },
+      },
+    ]),
+  ],
+  controllers: [GatewayController],
+  providers: [GatewayService, ApiKeyGuard],
+})
+export class GatewayModule {}
