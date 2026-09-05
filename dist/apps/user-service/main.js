@@ -514,31 +514,31 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "category", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "age", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "state", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "city", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "about", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "phoneNumber", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "address", void 0);
 __decorate([
@@ -550,19 +550,19 @@ __decorate([
     __metadata("design:type", Object)
 ], User.prototype, "posts", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false, nullable: true }),
+    (0, typeorm_1.Column)({ type: 'boolean', default: false, nullable: true }),
     __metadata("design:type", Object)
 ], User.prototype, "emailVerified", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false, nullable: true }),
+    (0, typeorm_1.Column)({ type: 'boolean', default: false, nullable: true }),
     __metadata("design:type", Object)
 ], User.prototype, "emailHidden", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false, nullable: true }),
+    (0, typeorm_1.Column)({ type: 'boolean', default: false, nullable: true }),
     __metadata("design:type", Object)
 ], User.prototype, "contactHidden", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true, default: null }),
     __metadata("design:type", Object)
 ], User.prototype, "role", void 0);
 __decorate([

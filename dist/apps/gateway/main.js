@@ -1,27 +1,12 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ([
-/* 0 */,
-/* 1 */
-/***/ ((module) => {
+/******/ 	var __webpack_modules__ = ({
 
-module.exports = require("dotenv/config");
-
-/***/ }),
-/* 2 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/core");
-
-/***/ }),
-/* 3 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/common");
-
-/***/ }),
-/* 4 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "./apps/gateway/src/api-key.guard.ts"
+/*!*******************************************!*\
+  !*** ./apps/gateway/src/api-key.guard.ts ***!
+  \*******************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -30,57 +15,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GatewayModule = void 0;
-const common_1 = __webpack_require__(3);
-const config_1 = __webpack_require__(5);
-const gateway_controller_1 = __webpack_require__(6);
-const gateway_service_1 = __webpack_require__(7);
-const api_key_guard_1 = __webpack_require__(10);
-const microservices_1 = __webpack_require__(8);
-let GatewayModule = class GatewayModule {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-exports.GatewayModule = GatewayModule;
-exports.GatewayModule = GatewayModule = __decorate([
-    (0, common_1.Module)({
-        imports: [
-            config_1.ConfigModule.forRoot({ isGlobal: true }),
-            microservices_1.ClientsModule.register([
-                {
-                    name: 'Service Client',
-                    transport: microservices_1.Transport.RMQ,
-                    options: {
-                        urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
-                        queue: process.env.service ?? 'service',
-                        queueOptions: { durable: false },
-                    },
-                },
-                {
-                    name: 'User Client',
-                    transport: microservices_1.Transport.RMQ,
-                    options: {
-                        urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
-                        queue: process.env.user_queue ?? 'user_queue',
-                        queueOptions: { durable: false },
-                    },
-                },
-            ]),
-        ],
-        controllers: [gateway_controller_1.GatewayController],
-        providers: [gateway_service_1.GatewayService, api_key_guard_1.ApiKeyGuard],
-    })
-], GatewayModule);
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiKeyGuard = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
+let ApiKeyGuard = class ApiKeyGuard {
+    configService;
+    constructor(configService) {
+        this.configService = configService;
+    }
+    canActivate(context) {
+        const request = context.switchToHttp().getRequest();
+        const apiKey = request.headers['x-api-key'] ?? request.headers['X-Api-Key'];
+        const expectedApiKey = this.configService.get('API_KEY') ?? process.env.API_KEY;
+        if (!expectedApiKey) {
+            throw new common_1.UnauthorizedException('API key is not configured');
+        }
+        if (apiKey !== expectedApiKey) {
+            throw new common_1.UnauthorizedException('Invalid API key');
+        }
+        return true;
+    }
+};
+exports.ApiKeyGuard = ApiKeyGuard;
+exports.ApiKeyGuard = ApiKeyGuard = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof config_1.ConfigService !== "undefined" && config_1.ConfigService) === "function" ? _a : Object])
+], ApiKeyGuard);
 
 
-/***/ }),
-/* 5 */
-/***/ ((module) => {
+/***/ },
 
-module.exports = require("@nestjs/config");
-
-/***/ }),
-/* 6 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "./apps/gateway/src/gateway.controller.ts"
+/*!************************************************!*\
+  !*** ./apps/gateway/src/gateway.controller.ts ***!
+  \************************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -98,9 +72,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GatewayController = void 0;
-const common_1 = __webpack_require__(3);
-const gateway_service_1 = __webpack_require__(7);
-const api_key_guard_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const gateway_service_1 = __webpack_require__(/*! ./gateway.service */ "./apps/gateway/src/gateway.service.ts");
+const api_key_guard_1 = __webpack_require__(/*! ./api-key.guard */ "./apps/gateway/src/api-key.guard.ts");
 let GatewayController = class GatewayController {
     gatewayService;
     constructor(gatewayService) {
@@ -215,9 +189,70 @@ exports.GatewayController = GatewayController = __decorate([
 ], GatewayController);
 
 
-/***/ }),
-/* 7 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ },
+
+/***/ "./apps/gateway/src/gateway.module.ts"
+/*!********************************************!*\
+  !*** ./apps/gateway/src/gateway.module.ts ***!
+  \********************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GatewayModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
+const gateway_controller_1 = __webpack_require__(/*! ./gateway.controller */ "./apps/gateway/src/gateway.controller.ts");
+const gateway_service_1 = __webpack_require__(/*! ./gateway.service */ "./apps/gateway/src/gateway.service.ts");
+const api_key_guard_1 = __webpack_require__(/*! ./api-key.guard */ "./apps/gateway/src/api-key.guard.ts");
+const microservices_1 = __webpack_require__(/*! @nestjs/microservices */ "@nestjs/microservices");
+let GatewayModule = class GatewayModule {
+};
+exports.GatewayModule = GatewayModule;
+exports.GatewayModule = GatewayModule = __decorate([
+    (0, common_1.Module)({
+        imports: [
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
+            microservices_1.ClientsModule.register([
+                {
+                    name: 'Service Client',
+                    transport: microservices_1.Transport.RMQ,
+                    options: {
+                        urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+                        queue: process.env.service ?? 'service',
+                        queueOptions: { durable: false },
+                    },
+                },
+                {
+                    name: 'User Client',
+                    transport: microservices_1.Transport.RMQ,
+                    options: {
+                        urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+                        queue: process.env.user_queue ?? 'user_queue',
+                        queueOptions: { durable: false },
+                    },
+                },
+            ]),
+        ],
+        controllers: [gateway_controller_1.GatewayController],
+        providers: [gateway_service_1.GatewayService, api_key_guard_1.ApiKeyGuard],
+    })
+], GatewayModule);
+
+
+/***/ },
+
+/***/ "./apps/gateway/src/gateway.service.ts"
+/*!*********************************************!*\
+  !*** ./apps/gateway/src/gateway.service.ts ***!
+  \*********************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -235,9 +270,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GatewayService = void 0;
-const common_1 = __webpack_require__(3);
-const microservices_1 = __webpack_require__(8);
-const rxjs_1 = __webpack_require__(9);
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const microservices_1 = __webpack_require__(/*! @nestjs/microservices */ "@nestjs/microservices");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 let GatewayService = class GatewayService {
     serviceClient;
     userClient;
@@ -291,64 +326,69 @@ exports.GatewayService = GatewayService = __decorate([
 ], GatewayService);
 
 
-/***/ }),
-/* 8 */
-/***/ ((module) => {
+/***/ },
+
+/***/ "@nestjs/common"
+/*!*********************************!*\
+  !*** external "@nestjs/common" ***!
+  \*********************************/
+(module) {
+
+module.exports = require("@nestjs/common");
+
+/***/ },
+
+/***/ "@nestjs/config"
+/*!*********************************!*\
+  !*** external "@nestjs/config" ***!
+  \*********************************/
+(module) {
+
+module.exports = require("@nestjs/config");
+
+/***/ },
+
+/***/ "@nestjs/core"
+/*!*******************************!*\
+  !*** external "@nestjs/core" ***!
+  \*******************************/
+(module) {
+
+module.exports = require("@nestjs/core");
+
+/***/ },
+
+/***/ "@nestjs/microservices"
+/*!****************************************!*\
+  !*** external "@nestjs/microservices" ***!
+  \****************************************/
+(module) {
 
 module.exports = require("@nestjs/microservices");
 
-/***/ }),
-/* 9 */
-/***/ ((module) => {
+/***/ },
+
+/***/ "dotenv/config"
+/*!********************************!*\
+  !*** external "dotenv/config" ***!
+  \********************************/
+(module) {
+
+module.exports = require("dotenv/config");
+
+/***/ },
+
+/***/ "rxjs"
+/*!***********************!*\
+  !*** external "rxjs" ***!
+  \***********************/
+(module) {
 
 module.exports = require("rxjs");
 
-/***/ }),
-/* 10 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ }
 
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiKeyGuard = void 0;
-const common_1 = __webpack_require__(3);
-const config_1 = __webpack_require__(5);
-let ApiKeyGuard = class ApiKeyGuard {
-    configService;
-    constructor(configService) {
-        this.configService = configService;
-    }
-    canActivate(context) {
-        const request = context.switchToHttp().getRequest();
-        const apiKey = request.headers['x-api-key'] ?? request.headers['X-Api-Key'];
-        const expectedApiKey = this.configService.get('API_KEY') ?? process.env.API_KEY;
-        if (!expectedApiKey) {
-            throw new common_1.UnauthorizedException('API key is not configured');
-        }
-        if (apiKey !== expectedApiKey) {
-            throw new common_1.UnauthorizedException('Invalid API key');
-        }
-        return true;
-    }
-};
-exports.ApiKeyGuard = ApiKeyGuard;
-exports.ApiKeyGuard = ApiKeyGuard = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof config_1.ConfigService !== "undefined" && config_1.ConfigService) === "function" ? _a : Object])
-], ApiKeyGuard);
-
-
-/***/ })
-/******/ 	]);
+/******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -368,6 +408,12 @@ exports.ApiKeyGuard = ApiKeyGuard = __decorate([
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
@@ -379,12 +425,15 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
+/*!**********************************!*\
+  !*** ./apps/gateway/src/main.ts ***!
+  \**********************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__webpack_require__(1);
-const core_1 = __webpack_require__(2);
-const common_1 = __webpack_require__(3);
-const gateway_module_1 = __webpack_require__(4);
+__webpack_require__(/*! dotenv/config */ "dotenv/config");
+const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const gateway_module_1 = __webpack_require__(/*! ./gateway.module */ "./apps/gateway/src/gateway.module.ts");
 async function bootstrap() {
     process.title = 'gateway';
     const logger = new common_1.Logger('GatewayBootstrap');

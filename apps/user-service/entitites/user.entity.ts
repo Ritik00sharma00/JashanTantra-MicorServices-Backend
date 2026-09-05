@@ -23,25 +23,25 @@ export class User {
     name!: string;
 
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     category!: string | null;
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     age!: string | null;
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     state!: string | null;
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     city!: string | null;
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     about!: string | null;
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     phoneNumber!: string | null;
 
-   @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     address!: string | null;
 
    @Column({ type: 'json', nullable: true, default: null })
@@ -50,16 +50,16 @@ export class User {
    @Column({ type: 'json', nullable: true, default: null })
     posts!: { photos?: string[]; text?: string }[] | null;
 
-   @Column({ default: false, nullable: true })
+   @Column({ type: 'boolean', default: false, nullable: true })
     emailVerified!: boolean | null;
 
-   @Column({ default: false, nullable: true })
+   @Column({ type: 'boolean', default: false, nullable: true })
     emailHidden!: boolean | null;
 
-   @Column({ default: false, nullable: true })
+   @Column({ type: 'boolean', default: false, nullable: true })
     contactHidden!: boolean | null;
 
-  @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', nullable: true, default: null })
     role!: string | null;
 
   @Column({
