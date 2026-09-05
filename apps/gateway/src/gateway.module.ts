@@ -7,7 +7,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true}),
     ClientsModule.register([
       {
         name: 'Service Client',
