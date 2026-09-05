@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "build:all": "npx nest build gateway && npx nest build user-service && npx nest build jashan_tantra",
     "start:all": "concurrently \"nest start gateway --watch\" \"nest start jashan_tantra --watch\" \"nest start user-service --watch\"",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",

@@ -1,12 +1,12 @@
 export class UpdateUserDto {
-  name?: string;
-  password?: string;
-  category?: string;
-  age?: string;
-  state?: string;
-  city?: string;
-  about?: string;
-  phoneNumber?: string;
+  name?: string | null;
+  password?: string | null;
+  category?: string | null;
+  age?: string | null;
+  state?: string | null;
+  city?: string | null;
+  about?: string | null;
+  phoneNumber?: string | null;
   address?: string;
   reviews?: { username?: string; text?: string }[];
   posts?: { photos?: string[]; text?: string }[];
