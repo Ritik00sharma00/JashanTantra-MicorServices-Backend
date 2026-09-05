@@ -51,6 +51,7 @@ exports.GatewayModule = GatewayModule = __decorate([
                     transport: microservices_1.Transport.RMQ,
                     options: {
                         urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+                        socketOptions: { heartbeat: 60 },
                         queue: process.env.service ?? 'service',
                         queueOptions: { durable: false },
                     },
@@ -60,6 +61,7 @@ exports.GatewayModule = GatewayModule = __decorate([
                     transport: microservices_1.Transport.RMQ,
                     options: {
                         urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+                        socketOptions: { heartbeat: 60 },
                         queue: process.env.user_queue ?? 'user_queue',
                         queueOptions: { durable: false },
                     },
