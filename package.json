@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "start:all": "concurrently \"nest start gateway --watch\" \"nest start jashan_tantra --watch\" \"nest start user-service --watch\"",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
@@ -32,6 +33,7 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "concurrently": "^10.0.5",
     "dotenv": "^17.4.2",
     "jsonwebtoken": "^9.0.1",
     "nodemailer": "^9.0.1",
