@@ -572,6 +572,7 @@ async function bootstrap() {
         transport: microservices_1.Transport.RMQ,
         options: {
             urls: [rmqUrl],
+            socketOptions: { heartbeat: 60 },
             queue,
             queueOptions: {
                 durable: false

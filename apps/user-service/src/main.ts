@@ -20,6 +20,7 @@ async function bootstrap() {
        transport: Transport.RMQ,
        options:{
         urls:[rmqUrl],
+        socketOptions:{ heartbeat:60 },
         queue,
         queueOptions:{
           durable:false
