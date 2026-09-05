@@ -10,7 +10,7 @@ async function bootstrap() {
 
    const port = process.env.userPort ? parseInt(process.env.userPort, 10) : 3002;
 
-   const rmqUrl=process.env.rabbitmq ?? " amqp://localhost:5672";
+  const rmqUrl=process.env.rabbitmq ?? "amqp://localhost:5672";
 
    const queue=process.env.user_queue ??"user_queue";
 

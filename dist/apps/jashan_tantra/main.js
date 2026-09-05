@@ -131,7 +131,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({
-                isGlobal: true,
+                isGlobal: true
             }),
             typeorm_1.TypeOrmModule.forRootAsync({
                 inject: [config_1.ConfigService],
@@ -639,7 +639,7 @@ async function bootstrap() {
     process.title = 'user';
     const logger = new common_1.Logger('UserBootstrap');
     const port = process.env.userPort ? parseInt(process.env.userPort, 10) : 3002;
-    const rmqUrl = process.env.rabbitmq ?? " amqp://localhost:5672";
+    const rmqUrl = process.env.rabbitmq ?? "amqp://localhost:5672";
     const queue = process.env.service ?? "service";
     const app = await core_1.NestFactory.createMicroservice(app_module_1.AppModule, {
         transport: microservices_1.Transport.RMQ,

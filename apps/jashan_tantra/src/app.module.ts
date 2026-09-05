@@ -12,7 +12,7 @@ import { Event } from './entities/event.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true,
+      isGlobal: true
     }),
 
     TypeOrmModule.forRootAsync({
