@@ -358,7 +358,7 @@ let UserServiceService = class UserServiceService {
     }
     async sendEmailVerification(email) {
         const brevoApiKey = process.env.BREVO_API_KEY;
-        const appUrl = process.env.APP_URL || 'http://localhost:3001';
+        const appUrl = process.env.APP_URL || 'http://localhost:3000';
         const secret = process.env.JWT_SECRET || 'AAshinamBhasnamKratitanamadharamsathram';
         if (!brevoApiKey) {
             throw new Error('Brevo API key is not configured');

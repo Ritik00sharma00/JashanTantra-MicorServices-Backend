@@ -7,7 +7,7 @@ async function bootstrap() {
   process.title = 'gateway';
 
   const logger = new Logger('GatewayBootstrap');
-  const port = parseInt(process.env.gateWay || '3001', 10);
+  const port = parseInt(process.env.gateWay || '3000', 10);
 
   const app = await NestFactory.create(GatewayModule);
   app.enableShutdownHooks();

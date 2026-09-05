@@ -437,7 +437,7 @@ const gateway_module_1 = __webpack_require__(/*! ./gateway.module */ "./apps/gat
 async function bootstrap() {
     process.title = 'gateway';
     const logger = new common_1.Logger('GatewayBootstrap');
-    const port = parseInt(process.env.gateWay || '3001', 10);
+    const port = parseInt(process.env.gateWay || '3000', 10);
     const app = await core_1.NestFactory.create(gateway_module_1.GatewayModule);
     app.enableShutdownHooks();
     app.enableCors();

@@ -3,7 +3,7 @@ Jashan Tantra API Documentation
 Project Overview
 - This project has a gateway app that exposes public API routes.
 - All gateway routes require an API key header: x-api-key
-- Base URL: http://localhost:3001
+- Base URL: http://localhost:3000
 - The gateway forwards requests to the user service using RabbitMQ.
 - The user service is the main service for user management and organizer lookup.
 - The event service is separate and handles event registration/cancel/update flows.
@@ -29,7 +29,7 @@ Datatypes:
 Why this route is used:
 - To check whether the gateway is alive and responding.
 Curl:
-curl -X GET http://localhost:3001/ \
+curl -X GET http://localhost:3000/ \
   -H "x-api-key: your-api-key"
 
 2) GET /service-health
@@ -42,7 +42,7 @@ Datatypes:
 Why this route is used:
 - To verify that the backend service is running and reachable through RabbitMQ.
 Curl:
-curl -X GET http://localhost:3001/service-health \
+curl -X GET http://localhost:3000/service-health \
   -H "x-api-key: your-api-key"
 
 3) GET /user-health
@@ -55,7 +55,7 @@ Datatypes:
 Why this route is used:
 - Useful for monitoring and uptime checks for the user module.
 Curl:
-curl -X GET http://localhost:3001/user-health \
+curl -X GET http://localhost:3000/user-health \
   -H "x-api-key: your-api-key"
 
 4) GET /user-hello
@@ -68,7 +68,7 @@ Datatypes:
 Why this route is used:
 - Quick smoke test for the user service connection and gateway message flow.
 Curl:
-curl -X GET http://localhost:3001/user-hello \
+curl -X GET http://localhost:3000/user-hello \
   -H "x-api-key: your-api-key"
 
 5) GET /user/:id
@@ -81,7 +81,7 @@ Datatypes:
 Why this route is used:
 - To fetch profile information for a user in public-read scenarios such as organizer details or profile views.
 Curl:
-curl -X GET http://localhost:3001/user/123 \
+curl -X GET http://localhost:3000/user/123 \
   -H "x-api-key: your-api-key"
 
 6) PATCH /user/:id/profile
@@ -108,7 +108,7 @@ Datatypes:
 Why this route is used:
 - To edit personal profile information after logging in or managing account details.
 Curl:
-curl -X PATCH http://localhost:3001/user/123/profile \
+curl -X PATCH http://localhost:3000/user/123/profile \
   -H "x-api-key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -129,7 +129,7 @@ Datatypes:
 Why this route is used:
 - To verify a user email before allowing full account access or sending secure actions.
 Curl:
-curl -X POST http://localhost:3001/verify-email \
+curl -X POST http://localhost:3000/verify-email \
   -H "x-api-key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -153,7 +153,7 @@ Why this route is used:
 - To search for organizers by location, field, or token/category.
 - Useful for event generation or user discovery features.
 Curl:
-curl -X GET "http://localhost:3001/organizers?state=Punjab&city=Chandigarh&category=Wedding&t=venue" \
+curl -X GET "http://localhost:3000/organizers?state=Punjab&city=Chandigarh&category=Wedding&t=venue" \
   -H "x-api-key: your-api-key"
 
 9) POST /create-user
@@ -181,7 +181,7 @@ Example request body:
 Why this route is used:
 - To create a new account for a user, organizer, or admin.
 Curl:
-curl -X POST http://localhost:3001/create-user \
+curl -X POST http://localhost:3000/create-user \
   -H "x-api-key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -204,7 +204,7 @@ Datatypes:
 Why this route is used:
 - To authenticate a user and get access to protected user actions.
 Curl:
-curl -X POST http://localhost:3001/login \
+curl -X POST http://localhost:3000/login \
   -H "x-api-key: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{

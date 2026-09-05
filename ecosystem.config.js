@@ -11,7 +11,7 @@ module.exports = {
       name: "user-service",
       script: "./dist/apps/user-service/main.js",
       env: {
-        PORT: 3001 
+        PORT: 3000 
       }
     },
     {
