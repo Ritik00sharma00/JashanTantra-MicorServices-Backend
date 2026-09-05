@@ -48,7 +48,7 @@ export class UserServiceService {
       throw new Error('Email and password are required');
     }
 
-    const existingUser = await this.userRepository.findOne({
+    const existingUser= await this.userRepository.findOne({
       where: { email },
     });
 

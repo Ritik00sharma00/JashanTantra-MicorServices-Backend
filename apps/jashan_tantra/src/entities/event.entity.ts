@@ -23,16 +23,16 @@ export class Event {
   @Column({ type: 'timestamp', nullable: true, default: null })
   eventDate!: Date | null;
 
-  @Column({ nullable: true, default: null })
+  @Column({ type: 'text', nullable: true, default: null })
   about!: string | null;
 
-  @Column({ nullable: true, default: null })
+  @Column({ type: 'text', nullable: true, default: null })
   requirements!: string | null;
 
   @Column({ type: 'json', nullable: true, default: null })
   reviews!: { username?: string; text?: string }[] | null;
 
-  @Column({ nullable: true, default: null })
+  @Column({ type: 'text', nullable: true, default: null })
   additionalDetails!: string | null;
 
   @CreateDateColumn()
