@@ -1,76 +1,21 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
+/***/ ((module) => {
 
-/***/ "./apps/jashan_tantra/src/app.controller.ts"
-/*!**************************************************!*\
-  !*** ./apps/jashan_tantra/src/app.controller.ts ***!
-  \**************************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
+module.exports = require("@nestjs/core");
 
+/***/ }),
+/* 2 */
+/***/ ((module) => {
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppController = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/jashan_tantra/src/app.service.ts");
-const microservices_1 = __webpack_require__(/*! @nestjs/microservices */ "@nestjs/microservices");
-let AppController = class AppController {
-    appService;
-    constructor(appService) {
-        this.appService = appService;
-    }
-    getServiceHealth() {
-        return this.appService.getHello();
-    }
-    getServiceHello() {
-        return this.appService.getHello();
-    }
-    getHello() {
-        return this.appService.getHello();
-    }
-};
-exports.AppController = AppController;
-__decorate([
-    (0, microservices_1.MessagePattern)('service.health'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getServiceHealth", null);
-__decorate([
-    (0, microservices_1.MessagePattern)('service.getHello'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getServiceHello", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof app_service_1.AppService !== "undefined" && app_service_1.AppService) === "function" ? _a : Object])
-], AppController);
+module.exports = require("@nestjs/microservices");
 
-
-/***/ },
-
-/***/ "./apps/jashan_tantra/src/app.module.ts"
-/*!**********************************************!*\
-  !*** ./apps/jashan_tantra/src/app.module.ts ***!
-  \**********************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
+/***/ }),
+/* 3 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -114,16 +59,16 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const app_controller_1 = __webpack_require__(/*! ./app.controller */ "./apps/jashan_tantra/src/app.controller.ts");
-const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/jashan_tantra/src/app.service.ts");
-const event_controller_1 = __webpack_require__(/*! ./event.controller */ "./apps/jashan_tantra/src/event.controller.ts");
-const event_service_1 = __webpack_require__(/*! ./event.service */ "./apps/jashan_tantra/src/event.service.ts");
-const typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ "@nestjs/typeorm");
-const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
-const fs = __importStar(__webpack_require__(/*! fs */ "fs"));
-const path = __importStar(__webpack_require__(/*! path */ "path"));
-const event_entity_1 = __webpack_require__(/*! ./entities/event.entity */ "./apps/jashan_tantra/src/entities/event.entity.ts");
+const common_1 = __webpack_require__(4);
+const app_controller_1 = __webpack_require__(5);
+const app_service_1 = __webpack_require__(6);
+const event_controller_1 = __webpack_require__(7);
+const event_service_1 = __webpack_require__(8);
+const typeorm_1 = __webpack_require__(9);
+const config_1 = __webpack_require__(14);
+const fs = __importStar(__webpack_require__(15));
+const path = __importStar(__webpack_require__(16));
+const event_entity_1 = __webpack_require__(11);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -166,87 +111,15 @@ exports.AppModule = AppModule = __decorate([
 ], AppModule);
 
 
-/***/ },
+/***/ }),
+/* 4 */
+/***/ ((module) => {
 
-/***/ "./apps/jashan_tantra/src/app.service.ts"
-/*!***********************************************!*\
-  !*** ./apps/jashan_tantra/src/app.service.ts ***!
-  \***********************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
+module.exports = require("@nestjs/common");
 
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppService = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-let AppService = class AppService {
-    getHello() {
-        return 'Hello World!';
-    }
-};
-exports.AppService = AppService;
-exports.AppService = AppService = __decorate([
-    (0, common_1.Injectable)()
-], AppService);
-
-
-/***/ },
-
-/***/ "./apps/jashan_tantra/src/dto/create-event.dto.ts"
-/*!********************************************************!*\
-  !*** ./apps/jashan_tantra/src/dto/create-event.dto.ts ***!
-  \********************************************************/
-(__unused_webpack_module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CreateEventDto = void 0;
-class CreateEventDto {
-    requestedBy;
-    toOrganizer;
-    eventDate;
-    about;
-    requirements;
-    reviews;
-    additionalDetails;
-}
-exports.CreateEventDto = CreateEventDto;
-
-
-/***/ },
-
-/***/ "./apps/jashan_tantra/src/dto/update-event.dto.ts"
-/*!********************************************************!*\
-  !*** ./apps/jashan_tantra/src/dto/update-event.dto.ts ***!
-  \********************************************************/
-(__unused_webpack_module, exports) {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UpdateEventDto = void 0;
-class UpdateEventDto {
-    eventDate;
-    about;
-    requirements;
-    reviews;
-    additionalDetails;
-    status;
-}
-exports.UpdateEventDto = UpdateEventDto;
-
-
-/***/ },
-
-/***/ "./apps/jashan_tantra/src/entities/event.entity.ts"
-/*!*********************************************************!*\
-  !*** ./apps/jashan_tantra/src/entities/event.entity.ts ***!
-  \*********************************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
+/***/ }),
+/* 5 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -258,80 +131,80 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b, _c;
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Event = void 0;
-const typeorm_1 = __webpack_require__(/*! typeorm */ "typeorm");
-let Event = class Event {
-    id;
-    requestedBy;
-    toOrganizer;
-    status;
-    eventDate;
-    about;
-    requirements;
-    reviews;
-    additionalDetails;
-    createdAt;
-    updatedAt;
+exports.AppController = void 0;
+const common_1 = __webpack_require__(4);
+const app_service_1 = __webpack_require__(6);
+const microservices_1 = __webpack_require__(2);
+let AppController = class AppController {
+    appService;
+    constructor(appService) {
+        this.appService = appService;
+    }
+    getServiceHealth() {
+        return this.appService.getHello();
+    }
+    getServiceHello() {
+        return this.appService.getHello();
+    }
+    getHello() {
+        return this.appService.getHello();
+    }
 };
-exports.Event = Event;
+exports.AppController = AppController;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
-    __metadata("design:type", String)
-], Event.prototype, "id", void 0);
+    (0, microservices_1.MessagePattern)('service.health'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], AppController.prototype, "getServiceHealth", null);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Event.prototype, "requestedBy", void 0);
+    (0, microservices_1.MessagePattern)('service.getHello'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], AppController.prototype, "getServiceHello", null);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Event.prototype, "toOrganizer", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: 'pending' }),
-    __metadata("design:type", String)
-], Event.prototype, "status", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'timestamp', nullable: true, default: null }),
-    __metadata("design:type", Object)
-], Event.prototype, "eventDate", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'text', nullable: true, default: null }),
-    __metadata("design:type", Object)
-], Event.prototype, "about", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'text', nullable: true, default: null }),
-    __metadata("design:type", Object)
-], Event.prototype, "requirements", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'json', nullable: true, default: null }),
-    __metadata("design:type", Object)
-], Event.prototype, "reviews", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'text', nullable: true, default: null }),
-    __metadata("design:type", Object)
-], Event.prototype, "additionalDetails", void 0);
-__decorate([
-    (0, typeorm_1.CreateDateColumn)(),
-    __metadata("design:type", typeof (_b = typeof Date !== "undefined" && Date) === "function" ? _b : Object)
-], Event.prototype, "createdAt", void 0);
-__decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", typeof (_c = typeof Date !== "undefined" && Date) === "function" ? _c : Object)
-], Event.prototype, "updatedAt", void 0);
-exports.Event = Event = __decorate([
-    (0, typeorm_1.Entity)('events')
-], Event);
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], AppController.prototype, "getHello", null);
+exports.AppController = AppController = __decorate([
+    (0, common_1.Controller)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof app_service_1.AppService !== "undefined" && app_service_1.AppService) === "function" ? _a : Object])
+], AppController);
 
 
-/***/ },
+/***/ }),
+/* 6 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
-/***/ "./apps/jashan_tantra/src/event.controller.ts"
-/*!****************************************************!*\
-  !*** ./apps/jashan_tantra/src/event.controller.ts ***!
-  \****************************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AppService = void 0;
+const common_1 = __webpack_require__(4);
+let AppService = class AppService {
+    getHello() {
+        return 'Hello World!';
+    }
+};
+exports.AppService = AppService;
+exports.AppService = AppService = __decorate([
+    (0, common_1.Injectable)()
+], AppService);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -349,10 +222,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EventController = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const event_service_1 = __webpack_require__(/*! ./event.service */ "./apps/jashan_tantra/src/event.service.ts");
-const create_event_dto_1 = __webpack_require__(/*! ./dto/create-event.dto */ "./apps/jashan_tantra/src/dto/create-event.dto.ts");
-const update_event_dto_1 = __webpack_require__(/*! ./dto/update-event.dto */ "./apps/jashan_tantra/src/dto/update-event.dto.ts");
+const common_1 = __webpack_require__(4);
+const event_service_1 = __webpack_require__(8);
+const create_event_dto_1 = __webpack_require__(12);
+const update_event_dto_1 = __webpack_require__(13);
 let EventController = class EventController {
     eventService;
     constructor(eventService) {
@@ -407,13 +280,9 @@ exports.EventController = EventController = __decorate([
 ], EventController);
 
 
-/***/ },
-
-/***/ "./apps/jashan_tantra/src/event.service.ts"
-/*!*************************************************!*\
-  !*** ./apps/jashan_tantra/src/event.service.ts ***!
-  \*************************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
+/***/ }),
+/* 8 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -431,10 +300,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EventService = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ "@nestjs/typeorm");
-const typeorm_2 = __webpack_require__(/*! typeorm */ "typeorm");
-const event_entity_1 = __webpack_require__(/*! ./entities/event.entity */ "./apps/jashan_tantra/src/entities/event.entity.ts");
+const common_1 = __webpack_require__(4);
+const typeorm_1 = __webpack_require__(9);
+const typeorm_2 = __webpack_require__(10);
+const event_entity_1 = __webpack_require__(11);
 let EventService = class EventService {
     eventRepository;
     constructor(eventRepository) {
@@ -507,89 +376,156 @@ exports.EventService = EventService = __decorate([
 ], EventService);
 
 
-/***/ },
-
-/***/ "@nestjs/common"
-/*!*********************************!*\
-  !*** external "@nestjs/common" ***!
-  \*********************************/
-(module) {
-
-module.exports = require("@nestjs/common");
-
-/***/ },
-
-/***/ "@nestjs/config"
-/*!*********************************!*\
-  !*** external "@nestjs/config" ***!
-  \*********************************/
-(module) {
-
-module.exports = require("@nestjs/config");
-
-/***/ },
-
-/***/ "@nestjs/core"
-/*!*******************************!*\
-  !*** external "@nestjs/core" ***!
-  \*******************************/
-(module) {
-
-module.exports = require("@nestjs/core");
-
-/***/ },
-
-/***/ "@nestjs/microservices"
-/*!****************************************!*\
-  !*** external "@nestjs/microservices" ***!
-  \****************************************/
-(module) {
-
-module.exports = require("@nestjs/microservices");
-
-/***/ },
-
-/***/ "@nestjs/typeorm"
-/*!**********************************!*\
-  !*** external "@nestjs/typeorm" ***!
-  \**********************************/
-(module) {
+/***/ }),
+/* 9 */
+/***/ ((module) => {
 
 module.exports = require("@nestjs/typeorm");
 
-/***/ },
-
-/***/ "typeorm"
-/*!**************************!*\
-  !*** external "typeorm" ***!
-  \**************************/
-(module) {
+/***/ }),
+/* 10 */
+/***/ ((module) => {
 
 module.exports = require("typeorm");
 
-/***/ },
+/***/ }),
+/* 11 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
-/***/ "fs"
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
-(module) {
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Event = void 0;
+const typeorm_1 = __webpack_require__(10);
+let Event = class Event {
+    id;
+    requestedBy;
+    toOrganizer;
+    status;
+    eventDate;
+    about;
+    requirements;
+    reviews;
+    additionalDetails;
+    createdAt;
+    updatedAt;
+};
+exports.Event = Event;
+__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
+    __metadata("design:type", String)
+], Event.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Event.prototype, "requestedBy", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Event.prototype, "toOrganizer", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 'pending' }),
+    __metadata("design:type", String)
+], Event.prototype, "status", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'timestamp', nullable: true, default: null }),
+    __metadata("design:type", Object)
+], Event.prototype, "eventDate", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text', nullable: true, default: null }),
+    __metadata("design:type", Object)
+], Event.prototype, "about", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text', nullable: true, default: null }),
+    __metadata("design:type", Object)
+], Event.prototype, "requirements", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'json', nullable: true, default: null }),
+    __metadata("design:type", Object)
+], Event.prototype, "reviews", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text', nullable: true, default: null }),
+    __metadata("design:type", Object)
+], Event.prototype, "additionalDetails", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", typeof (_b = typeof Date !== "undefined" && Date) === "function" ? _b : Object)
+], Event.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", typeof (_c = typeof Date !== "undefined" && Date) === "function" ? _c : Object)
+], Event.prototype, "updatedAt", void 0);
+exports.Event = Event = __decorate([
+    (0, typeorm_1.Entity)('events')
+], Event);
+
+
+/***/ }),
+/* 12 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CreateEventDto = void 0;
+class CreateEventDto {
+    requestedBy;
+    toOrganizer;
+    eventDate;
+    about;
+    requirements;
+    reviews;
+    additionalDetails;
+}
+exports.CreateEventDto = CreateEventDto;
+
+
+/***/ }),
+/* 13 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UpdateEventDto = void 0;
+class UpdateEventDto {
+    eventDate;
+    about;
+    requirements;
+    reviews;
+    additionalDetails;
+    status;
+}
+exports.UpdateEventDto = UpdateEventDto;
+
+
+/***/ }),
+/* 14 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/config");
+
+/***/ }),
+/* 15 */
+/***/ ((module) => {
 
 module.exports = require("fs");
 
-/***/ },
-
-/***/ "path"
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-(module) {
+/***/ }),
+/* 16 */
+/***/ ((module) => {
 
 module.exports = require("path");
 
-/***/ }
-
-/******/ 	});
+/***/ })
+/******/ 	]);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -609,12 +545,6 @@ module.exports = require("path");
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		if (!(moduleId in __webpack_modules__)) {
-/******/ 			delete __webpack_module_cache__[moduleId];
-/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
-/******/ 			e.code = 'MODULE_NOT_FOUND';
-/******/ 			throw e;
-/******/ 		}
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
@@ -626,15 +556,12 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
-/*!****************************************!*\
-  !*** ./apps/jashan_tantra/src/main.ts ***!
-  \****************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
-const microservices_1 = __webpack_require__(/*! @nestjs/microservices */ "@nestjs/microservices");
-const app_module_1 = __webpack_require__(/*! ./app.module */ "./apps/jashan_tantra/src/app.module.ts");
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const core_1 = __webpack_require__(1);
+const microservices_1 = __webpack_require__(2);
+const app_module_1 = __webpack_require__(3);
+const common_1 = __webpack_require__(4);
 async function bootstrap() {
     process.title = 'user';
     const logger = new common_1.Logger('UserBootstrap');
