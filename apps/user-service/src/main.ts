@@ -8,11 +8,24 @@ async function bootstrap() {
 
    const logger = new Logger('UserBootstrap');
 
-   const port = process.env.userPort ? parseInt(process.env.userPort, 10) : 3002;
+   const portValue = process.env['userPort'];
+   if (!portValue) {
+      throw new Error('userPort is not defined in the environment');
+   }
+   const port = parseInt(portValue, 10);
+   if (Number.isNaN(port)) {
+      throw new Error('userPort must be a valid number');
+   }
 
-  const rmqUrl=process.env.rabbitmq ?? "amqp://localhost:5672";
+  const rmqUrl = process.env['rabbitmq'];
+  if (!rmqUrl) {
+    throw new Error('rabbitmq is not defined in the environment');
+  }
 
-   const queue=process.env.user_queue ??"user_queue";
+   const queue = process.env['user_queue'];
+   if (!queue) {
+     throw new Error('user_queue is not defined in the environment');
+   }
 
    const app = await NestFactory.createMicroservice<MicroserviceOptions>(
      UserServiceModule,

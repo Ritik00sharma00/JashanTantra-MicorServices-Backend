@@ -223,6 +223,7 @@ var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EventController = void 0;
 const common_1 = __webpack_require__(4);
+const microservices_1 = __webpack_require__(2);
 const event_service_1 = __webpack_require__(8);
 const create_event_dto_1 = __webpack_require__(12);
 const update_event_dto_1 = __webpack_require__(13);
@@ -242,6 +243,9 @@ let EventController = class EventController {
     }
     async getEvent(id) {
         return this.eventService.getEventById(id);
+    }
+    async getAllEvents() {
+        return this.eventService.getAllEvents();
     }
 };
 exports.EventController = EventController;
@@ -274,6 +278,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], EventController.prototype, "getEvent", null);
+__decorate([
+    (0, microservices_1.MessagePattern)('service.get-all-events'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], EventController.prototype, "getAllEvents", null);
 exports.EventController = EventController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [typeof (_a = typeof event_service_1.EventService !== "undefined" && event_service_1.EventService) === "function" ? _a : Object])
@@ -356,6 +366,9 @@ let EventService = class EventService {
         }
         event.status = 'cancelled';
         return await this.eventRepository.save(event);
+    }
+    async getAllEvents() {
+        return await this.eventRepository.find();
     }
     async getEventById(eventId) {
         const event = await this.eventRepository.findOne({ where: { id: eventId } });
@@ -565,9 +578,22 @@ const common_1 = __webpack_require__(4);
 async function bootstrap() {
     process.title = 'user';
     const logger = new common_1.Logger('UserBootstrap');
-    const port = process.env.userPort ? parseInt(process.env.userPort, 10) : 3002;
-    const rmqUrl = process.env.rabbitmq ?? "amqp://localhost:5672";
-    const queue = process.env.service ?? "service";
+    const portValue = process.env['Jashanport'];
+    if (!portValue) {
+        throw new Error('Jashanport is not defined in the environment');
+    }
+    const port = parseInt(portValue, 10);
+    if (Number.isNaN(port)) {
+        throw new Error('Jashanport must be a valid number');
+    }
+    const rmqUrl = process.env['rabbitmq'];
+    if (!rmqUrl) {
+        throw new Error('rabbitmq is not defined in the environment');
+    }
+    const queue = process.env['service'];
+    if (!queue) {
+        throw new Error('service is not defined in the environment');
+    }
     const app = await core_1.NestFactory.createMicroservice(app_module_1.AppModule, {
         transport: microservices_1.Transport.RMQ,
         options: {

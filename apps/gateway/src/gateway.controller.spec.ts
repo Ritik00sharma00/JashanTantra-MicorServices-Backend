@@ -29,7 +29,7 @@ describe('GatewayController', () => {
         },
         {
           provide: ConfigService,
-          useValue: { get: jest.fn(() => process.env.API_KEY || 'test-key') },
+          useValue: { get: jest.fn(() => process.env.API_KEY) },
         },
       ],
     }).compile();

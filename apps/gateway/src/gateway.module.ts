@@ -16,9 +16,9 @@ import { JwtStrategy } from './auth/jwt.strategy';
         name: 'Service Client',
         transport: Transport.RMQ,
         options: {
-          urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+          urls: [process.env['rabbitmq'] as string],
           socketOptions: { heartbeat: 60 },
-          queue: process.env.service ?? 'service',
+          queue: process.env['service'] as string,
           queueOptions: { durable: false },
         },
       },
@@ -26,9 +26,9 @@ import { JwtStrategy } from './auth/jwt.strategy';
         name: 'User Client',
         transport: Transport.RMQ,
         options: {
-          urls: [process.env.rabbitmq ?? 'amqp://localhost:5672'],
+          urls: [process.env['rabbitmq'] as string],
           socketOptions: { heartbeat: 60 },
-          queue: process.env.user_queue ?? 'user_queue',
+          queue: process.env['user_queue'] as string,
           queueOptions: { durable: false },
         },
       },

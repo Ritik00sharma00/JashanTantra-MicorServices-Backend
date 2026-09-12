@@ -103,11 +103,15 @@ export class UserServiceService {
 
   async sendEmailVerification(email: string): Promise<{ message: string; verificationLink: string }> {
     const brevoApiKey = process.env.BREVO_API_KEY;
-    const appUrl = process.env.APP_URL || 'http://localhost:3000';
+    const appUrl = process.env.APP_URL;
     const secret = process.env['JWT_SECRET'];
 
     if (!secret) {
       throw new Error('JWT_SECRET is not defined in the environment');
+    }
+
+    if (!appUrl) {
+      throw new Error('APP_URL is not defined in the environment');
     }
 
     if (!brevoApiKey) {
@@ -131,7 +135,7 @@ export class UserServiceService {
         'api-key': brevoApiKey,
       },
       body: JSON.stringify({
-        sender: { email: process.env.BREVO_SENDER_EMAIL ?? 'no-reply@example.com' },
+        sender: { email: process.env.BREVO_SENDER_EMAIL as string },
         to: [{ email }],
         subject: 'Verify your email',
         htmlContent: `<p>Please verify your email by clicking <a href="${verificationLink}">here</a>.</p>`,

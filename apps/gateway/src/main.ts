@@ -7,7 +7,17 @@ async function bootstrap() {
   process.title = 'gateway';
 
   const logger = new Logger('GatewayBootstrap');
-  const port = parseInt(process.env.gateWay || '3000', 10);
+  const portValue = process.env['gateWay'];
+
+  if (!portValue) {
+    throw new Error('gateWay is not defined in the environment');
+  }
+
+  const port = parseInt(portValue, 10);
+
+  if (Number.isNaN(port)) {
+    throw new Error('gateWay must be a valid number');
+  }
 
   const app = await NestFactory.create(GatewayModule);
   app.enableShutdownHooks();
