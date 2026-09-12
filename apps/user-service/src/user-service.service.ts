@@ -65,11 +65,16 @@ export class UserServiceService {
       throw new Error('Invalid email or password');
     }
 
-    const secret = process.env.JWT_SECRET || 'AAshinamBhasnamKratitanamadharamsathram';
+    const secret = process.env['JWT_SECRET'];
+    if (!secret) {
+      throw new Error('JWT_SECRET is not defined in the environment');
+    }
+
     const token = jwt.sign(
       {
         sub: existingUser.id,
         email: existingUser.email,
+        role: existingUser.role,
       },
       secret,
       { expiresIn: '1h' },
@@ -99,7 +104,11 @@ export class UserServiceService {
   async sendEmailVerification(email: string): Promise<{ message: string; verificationLink: string }> {
     const brevoApiKey = process.env.BREVO_API_KEY;
     const appUrl = process.env.APP_URL || 'http://localhost:3000';
-    const secret = process.env.JWT_SECRET || 'AAshinamBhasnamKratitanamadharamsathram';
+    const secret = process.env['JWT_SECRET'];
+
+    if (!secret) {
+      throw new Error('JWT_SECRET is not defined in the environment');
+    }
 
     if (!brevoApiKey) {
       throw new Error('Brevo API key is not configured');
@@ -161,6 +170,14 @@ export class UserServiceService {
     }
 
     return await query.getMany();
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return await this.userRepository.find();
+  }
+
+  async getUserByEmail(email: string): Promise<User | null> {
+    return await this.userRepository.findOne({ where: { email } });
   }
 
   async getUserById(userId: string): Promise<User | null> {

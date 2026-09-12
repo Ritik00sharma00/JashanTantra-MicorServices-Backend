@@ -51,6 +51,23 @@ export class GatewayService {
     return response;
   }
 
+  async getUserByEmail(email: string): Promise<any> {
+    const response = await firstValueFrom(
+      this.userClient.send('user.get-by-email', { email }),
+    );
+    return response;
+  }
+
+  async getAllUsers(): Promise<any> {
+    const response = await firstValueFrom(this.userClient.send('user.get-all-users', {}));
+    return response;
+  }
+
+  async getAllEvents(): Promise<any> {
+    const response = await firstValueFrom(this.serviceClient.send('service.get-all-events', {}));
+    return response;
+  }
+
   async editUserProfile(id: string, updates: any): Promise<any> {
     const response = await firstValueFrom(
       this.userClient.send('user.edit-profile', { id, updates }),

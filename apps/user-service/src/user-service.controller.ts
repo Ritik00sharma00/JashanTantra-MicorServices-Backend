@@ -42,6 +42,16 @@ export class UserServiceController {
     return this.userServiceService.editProfile(data.id, data.updates);
   }
 
+  @MessagePattern('user.get-all-users')
+  getAllUsers(): Promise<User[]> {
+    return this.userServiceService.getAllUsers();
+  }
+
+  @MessagePattern('user.get-by-email')
+  getUserByEmail(data: { email: string }): Promise<User | null> {
+    return this.userServiceService.getUserByEmail(data.email);
+  }
+
   @MessagePattern('user.verify-email')
   verifyEmail(data: { email: string }): Promise<{ message: string; verificationLink: string }> {
     return this.userServiceService.sendEmailVerification(data.email);

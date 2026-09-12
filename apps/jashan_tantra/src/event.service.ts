@@ -71,6 +71,10 @@ export class EventService {
     return await this.eventRepository.save(event);
   }
 
+  async getAllEvents(): Promise<Event[]> {
+    return await this.eventRepository.find();
+  }
+
   async getEventById(eventId: string): Promise<any> {
     const event = await this.eventRepository.findOne({ where: { id: eventId } });
     if (!event) {

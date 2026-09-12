@@ -6,6 +6,7 @@ import {
   Body,
   Param,
 } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -32,5 +33,10 @@ export class EventController {
   @Get('events/:id')
   async getEvent(@Param('id') id: string) {
     return this.eventService.getEventById(id);
+  }
+
+  @MessagePattern('service.get-all-events')
+  async getAllEvents() {
+    return this.eventService.getAllEvents();
   }
 }

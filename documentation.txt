@@ -1,27 +1,55 @@
 Jashan Tantra API Documentation
 
 Project Overview
-- This project has a gateway app that exposes public API routes.
-- All gateway routes require an API key header: x-api-key
+- This project has a gateway app that exposes the public HTTP API.
+- The gateway sits in front of internal microservices and forwards requests over RabbitMQ.
 - Base URL: http://localhost:3000
-- The gateway forwards requests to the user service using RabbitMQ.
-- The user service is the main service for user management and organizer lookup.
-- The event service is separate and handles event registration/cancel/update flows.
+- The user service handles user management and organizer lookup.
+- The event service handles event registration, updates, cancellation, and lookup.
 
-Authentication
-- All gateway routes are protected by ApiKeyGuard.
-- Header required:
-  x-api-key: <your-api-key>
-- The key is taken from the .env variable: API_KEY
+Authentication Model
+- Every protected route requires a JWT token in the Authorization header.
+- Public routes do not require JWT, such as sign-up, login, and public info routes.
+- All gateway routes also require the API key header: x-api-key
+- The API key is read from the .env variable: API_KEY
+- The JWT secret is read from the .env variable: JWT_SECRET
+
+Headers required for protected requests:
+- x-api-key: <your-api-key>
+- Authorization: Bearer <jwt-token>
 
 Important Note
 - Gateway is the only public HTTP entry point.
-- User service and event service are mainly internal microservices, using RabbitMQ messaging.
-- Some internal service methods are not directly exposed as HTTP endpoints, but the gateway handles the public API for them.
+- User service and event service are mostly internal microservices and communicate via RabbitMQ.
+- Some internal service methods are not directly exposed as HTTP endpoints, but the gateway exposes the public API for them.
+- JWT is issued only after successful login and not during sign-up.
+
+Public Routes
+- POST /create-user
+- POST /login
+- POST /verify-email
+- GET /organizers
+- GET /service-health
+- GET /user-health
+- GET /user-hello
+- GET /
+
+Protected Routes
+- GET /user/:id
+- PATCH /user/:id/profile
+- GET /admin/users
+- GET /admin/events
+
+Admin Only Routes
+- GET /admin/users
+- GET /admin/events
+- These endpoints require a valid JWT and the logged-in user must have role = admin
 
 1) GET /
 Purpose:
 - Health check / root route for the gateway.
+Authentication:
+- Public route
 Parameters:
 - None
 Datatypes:
@@ -196,13 +224,21 @@ curl -X POST http://localhost:3000/create-user \
 10) POST /login
 Purpose:
 - Logs in an existing user and returns a JWT token.
+Authentication:
+- Public route
 Parameters:
 - Body: { email: string, password: string }
 Datatypes:
 - email: string
 - password: string
 Why this route is used:
-- To authenticate a user and get access to protected user actions.
+- To authenticate a user and receive a JWT that is used on every protected route.
+- The JWT is issued only after successful login.
+Response example:
+{
+  "message": "Login Successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
 Curl:
 curl -X POST http://localhost:3000/login \
   -H "x-api-key: your-api-key" \
@@ -211,6 +247,47 @@ curl -X POST http://localhost:3000/login \
     "email": "user@example.com",
     "password": "123456"
   }'
+
+Protected Route Usage Example
+- After successful login, include the token for all protected routes.
+Curl example:
+curl -X GET http://localhost:3000/user/123 \
+  -H "x-api-key: your-api-key" \
+  -H "Authorization: Bearer <jwt-token>"
+
+11) GET /admin/users
+Purpose:
+- Fetches all users in the system.
+Authentication:
+- Requires JWT token
+- Requires user role = admin
+Parameters:
+- None
+Datatypes:
+- None
+Why this route is used:
+- To view all registered users only by an admin.
+Curl:
+curl -X GET http://localhost:3000/admin/users \
+  -H "x-api-key: your-api-key" \
+  -H "Authorization: Bearer <jwt-token>"
+
+12) GET /admin/events
+Purpose:
+- Fetches all events in the system.
+Authentication:
+- Requires JWT token
+- Requires user role = admin
+Parameters:
+- None
+Datatypes:
+- None
+Why this route is used:
+- To view all events only by an admin.
+Curl:
+curl -X GET http://localhost:3000/admin/events \
+  -H "x-api-key: your-api-key" \
+  -H "Authorization: Bearer <jwt-token>"
 
 Event Routes (Service-level routes)
 The event service has these endpoints in the code, though in the current architecture it is operating as a microservice and is usually called internally via RabbitMQ.

@@ -1,6 +1,18 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  ForbiddenException,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { GatewayService } from './gateway.service';
 import { ApiKeyGuard } from './api-key.guard';
+import { Public } from './common/decorators/public.decorator';
 
 @UseGuards(ApiKeyGuard)
 @Controller()
@@ -40,11 +52,13 @@ export class GatewayController {
     return this.gatewayService.editUserProfile(id, updates);
   }
 
+  @Public()
   @Post('verify-email')
   verifyEmail(@Body() body: { email: string }): Promise<any> {
     return this.gatewayService.verifyEmail(body.email);
   }
 
+  @Public()
   @Get('organizers')
   findOrganizers(
     @Query('state') state?: string,
@@ -55,11 +69,29 @@ export class GatewayController {
     return this.gatewayService.findOrganizers({ state, city, category, t });
   }
 
+  @Get('admin/users')
+  async getAllUsers(@Req() req: any): Promise<any> {
+    if (req.user?.role !== 'admin') {
+      throw new ForbiddenException('Admin access required');
+    }
+    return this.gatewayService.getAllUsers();
+  }
+
+  @Get('admin/events')
+  async getAllEvents(@Req() req: any): Promise<any> {
+    if (req.user?.role !== 'admin') {
+      throw new ForbiddenException('Admin access required');
+    }
+    return this.gatewayService.getAllEvents();
+  }
+
+  @Public()
   @Post('create-user')
   createUser(@Body() user: any): Promise<any> {
     return this.gatewayService.createUser(user);
   }
 
+  @Public()
   @Post('login')
   loginUser(
     @Body() data: { email: string; password: string },

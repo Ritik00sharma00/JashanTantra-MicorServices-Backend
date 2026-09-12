@@ -9,7 +9,7 @@ async function bootstrap() {
 
    const logger = new Logger('UserBootstrap');
 
-   const port = process.env.userPort ? parseInt(process.env.userPort, 10) : 3002;
+   const port = process.env.Jashanport ? parseInt(process.env.Jashanport, 10) : 3001;
 
   const rmqUrl=process.env.rabbitmq ?? "amqp://localhost:5672";
 

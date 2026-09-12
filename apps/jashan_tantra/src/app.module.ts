@@ -30,11 +30,11 @@ import { Event } from './entities/event.entity';
           database: config.get<string>('DB_NAME'),
           ssl: sslEnabled
             ? {
-                ca: fs.existsSync(certPath)
-                  ? fs.readFileSync(certPath, 'utf8')
-                  : undefined,
-                rejectUnauthorized: false,
-              }
+              ca: fs.existsSync(certPath)
+                ? fs.readFileSync(certPath, 'utf8')
+                : undefined,
+              rejectUnauthorized: false,
+            }
             : false,
           autoLoadEntities: true,
           synchronize: true,
@@ -46,4 +46,4 @@ import { Event } from './entities/event.entity';
   controllers: [AppController, EventController],
   providers: [AppService, EventService],
 })
-export class AppModule {}
+export class AppModule { }
