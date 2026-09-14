@@ -37,7 +37,9 @@ describe('GatewayController', () => {
     controller = module.get<GatewayController>(GatewayController);
   });
 
-  it('should expose admin routes for all users and all events', () => {
+  it('should expose the all-user list routes for authenticated users', () => {
+    expect(typeof controller.getUsers).toBe('function');
+    expect(typeof controller.getEvents).toBe('function');
     expect(typeof controller.getAllUsers).toBe('function');
     expect(typeof controller.getAllEvents).toBe('function');
   });

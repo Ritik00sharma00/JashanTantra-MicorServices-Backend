@@ -37,13 +37,16 @@ Public Routes
 Protected Routes
 - GET /user/:id
 - PATCH /user/:id/profile
-- GET /admin/users
-- GET /admin/events
+- GET /users
+- GET /events
+- GET /admin/users (legacy alias, same access as /users)
+- GET /admin/events (legacy alias, same access as /events)
 
-Admin Only Routes
-- GET /admin/users
-- GET /admin/events
-- These endpoints require a valid JWT and the logged-in user must have role = admin
+Authenticated User Routes
+- GET /users
+- GET /events
+- These endpoints require a valid JWT, but any authenticated user can access them; no admin role is required.
+- The /admin/users and /admin/events routes are kept as compatibility aliases and behave the same way.
 
 1) GET /
 Purpose:
@@ -255,39 +258,44 @@ curl -X GET http://localhost:3000/user/123 \
   -H "x-api-key: your-api-key" \
   -H "Authorization: Bearer <jwt-token>"
 
-11) GET /admin/users
+11) GET /users
 Purpose:
 - Fetches all users in the system.
 Authentication:
 - Requires JWT token
-- Requires user role = admin
+- Open to any authenticated user
 Parameters:
 - None
 Datatypes:
 - None
 Why this route is used:
-- To view all registered users only by an admin.
+- To view the complete registered user list for normal authenticated users.
 Curl:
-curl -X GET http://localhost:3000/admin/users \
+curl -X GET http://localhost:3000/users \
   -H "x-api-key: your-api-key" \
   -H "Authorization: Bearer <jwt-token>"
 
-12) GET /admin/events
+12) GET /events
 Purpose:
 - Fetches all events in the system.
 Authentication:
 - Requires JWT token
-- Requires user role = admin
+- Open to any authenticated user
 Parameters:
 - None
 Datatypes:
 - None
 Why this route is used:
-- To view all events only by an admin.
+- To view all events for any logged-in user.
 Curl:
-curl -X GET http://localhost:3000/admin/events \
+curl -X GET http://localhost:3000/events \
   -H "x-api-key: your-api-key" \
   -H "Authorization: Bearer <jwt-token>"
+
+Legacy compatibility routes
+- GET /admin/users
+- GET /admin/events
+These aliases behave exactly like /users and /events, and do not enforce admin-only access anymore.
 
 Event Routes (Service-level routes)
 The event service has these endpoints in the code, though in the current architecture it is operating as a microservice and is usually called internally via RabbitMQ.
