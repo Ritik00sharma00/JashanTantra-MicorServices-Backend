@@ -1,13 +1,11 @@
 import {
   Body,
   Controller,
-  ForbiddenException,
   Get,
   Param,
   Patch,
   Post,
   Query,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { GatewayService } from './gateway.service';
@@ -69,19 +67,23 @@ export class GatewayController {
     return this.gatewayService.findOrganizers({ state, city, category, t });
   }
 
+  @Get('users')
+  async getUsers(): Promise<any> {
+    return this.gatewayService.getAllUsers();
+  }
+
+  @Get('events')
+  async getEvents(): Promise<any> {
+    return this.gatewayService.getAllEvents();
+  }
+
   @Get('admin/users')
-  async getAllUsers(@Req() req: any): Promise<any> {
-    if (req.user?.role !== 'admin') {
-      throw new ForbiddenException('Admin access required');
-    }
+  async getAllUsers(): Promise<any> {
     return this.gatewayService.getAllUsers();
   }
 
   @Get('admin/events')
-  async getAllEvents(@Req() req: any): Promise<any> {
-    if (req.user?.role !== 'admin') {
-      throw new ForbiddenException('Admin access required');
-    }
+  async getAllEvents(): Promise<any> {
     return this.gatewayService.getAllEvents();
   }
 
