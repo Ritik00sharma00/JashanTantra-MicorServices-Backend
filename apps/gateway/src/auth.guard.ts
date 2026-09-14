@@ -1,7 +1,6 @@
 import {
   CanActivate,
   ExecutionContext,
-  ForbiddenException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -75,12 +74,6 @@ export class AuthGuard implements CanActivate {
       email: user.email,
       role: user.role,
     };
-
-    if (path.startsWith('/admin/')) {
-      if (user.role !== 'admin') {
-        throw new ForbiddenException('Admin access required');
-      }
-    }
 
     return true;
   }
